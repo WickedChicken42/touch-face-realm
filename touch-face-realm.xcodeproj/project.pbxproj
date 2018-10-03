@@ -17,8 +17,8 @@
 		270B7E5B215C2618008E2FFC /* NoteObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270B7E5A215C2618008E2FFC /* NoteObjects.swift */; };
 		270B7E5D215C294F008E2FFC /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270B7E5C215C294F008E2FFC /* NoteCell.swift */; };
 		270B7E5F215C2DDF008E2FFC /* NoteDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270B7E5E215C2DDF008E2FFC /* NoteDetailVC.swift */; };
-		270B7E61215C3B63008E2FFC /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270B7E60215C3B63008E2FFC /* Helpers.swift */; };
-		27C358BA215D41B4003BD1CC /* touch-face.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27C358B8215D41B4003BD1CC /* touch-face.xcdatamodeld */; };
+		270B7E61215C3B63008E2FFC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270B7E60215C3B63008E2FFC /* Constants.swift */; };
+		BD9B526362F29FEDE5CA37A8 /* Pods_touch_face_realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670A30B32B5EADA8CB7BF607 /* Pods_touch_face_realm.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,8 +34,10 @@
 		270B7E5A215C2618008E2FFC /* NoteObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteObjects.swift; sourceTree = "<group>"; };
 		270B7E5C215C294F008E2FFC /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		270B7E5E215C2DDF008E2FFC /* NoteDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailVC.swift; sourceTree = "<group>"; };
-		270B7E60215C3B63008E2FFC /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		27C358B9215D41B4003BD1CC /* securenote_app.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = securenote_app.xcdatamodel; sourceTree = "<group>"; };
+		270B7E60215C3B63008E2FFC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		670A30B32B5EADA8CB7BF607 /* Pods_touch_face_realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_touch_face_realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1B701893F5DD64A459A328A /* Pods-touch-face-realm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-touch-face-realm.release.xcconfig"; path = "Pods/Target Support Files/Pods-touch-face-realm/Pods-touch-face-realm.release.xcconfig"; sourceTree = "<group>"; };
+		FA55772B0A7929705065317C /* Pods-touch-face-realm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-touch-face-realm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-touch-face-realm/Pods-touch-face-realm.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,17 +45,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD9B526362F29FEDE5CA37A8 /* Pods_touch_face_realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F46268B65CE19269C0C7077 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FA55772B0A7929705065317C /* Pods-touch-face-realm.debug.xcconfig */,
+				C1B701893F5DD64A459A328A /* Pods-touch-face-realm.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		113950C69B31234680A86E97 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				670A30B32B5EADA8CB7BF607 /* Pods_touch_face_realm.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		270B7E33215C2119008E2FFC = {
 			isa = PBXGroup;
 			children = (
 				270B7E3E215C2119008E2FFC /* touch-face-realm */,
 				270B7E3D215C2119008E2FFC /* Products */,
+				0F46268B65CE19269C0C7077 /* Pods */,
+				113950C69B31234680A86E97 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,7 +100,6 @@
 				270B7E46215C2119008E2FFC /* Assets.xcassets */,
 				270B7E48215C2119008E2FFC /* LaunchScreen.storyboard */,
 				270B7E4B215C2119008E2FFC /* Info.plist */,
-				27C358B8215D41B4003BD1CC /* touch-face.xcdatamodeld */,
 			);
 			path = "touch-face-realm";
 			sourceTree = "<group>";
@@ -120,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				270B7E5A215C2618008E2FFC /* NoteObjects.swift */,
-				270B7E60215C3B63008E2FFC /* Helpers.swift */,
+				270B7E60215C3B63008E2FFC /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -132,9 +153,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 270B7E4E215C2119008E2FFC /* Build configuration list for PBXNativeTarget "touch-face-realm" */;
 			buildPhases = (
+				0DC35B65C8484911E9C7ED39 /* [CP] Check Pods Manifest.lock */,
 				270B7E38215C2119008E2FFC /* Sources */,
 				270B7E39215C2119008E2FFC /* Frameworks */,
 				270B7E3A215C2119008E2FFC /* Resources */,
+				0A05FCBD1E02D6399CB582F9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -191,6 +214,55 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0A05FCBD1E02D6399CB582F9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-touch-face-realm/Pods-touch-face-realm-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-touch-face-realm/Pods-touch-face-realm-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0DC35B65C8484911E9C7ED39 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-touch-face-realm-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		270B7E38215C2119008E2FFC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -199,10 +271,9 @@
 				270B7E5B215C2618008E2FFC /* NoteObjects.swift in Sources */,
 				270B7E5F215C2DDF008E2FFC /* NoteDetailVC.swift in Sources */,
 				270B7E59215C2595008E2FFC /* LockStatus.swift in Sources */,
-				270B7E61215C3B63008E2FFC /* Helpers.swift in Sources */,
+				270B7E61215C3B63008E2FFC /* Constants.swift in Sources */,
 				270B7E42215C2119008E2FFC /* NoteVC.swift in Sources */,
 				270B7E5D215C294F008E2FFC /* NoteCell.swift in Sources */,
-				27C358BA215D41B4003BD1CC /* touch-face.xcdatamodeld in Sources */,
 				270B7E40215C2119008E2FFC /* AppDelegate.swift in Sources */,
 				270B7E57215C252D008E2FFC /* Note.swift in Sources */,
 			);
@@ -348,16 +419,17 @@
 		};
 		270B7E4F215C2119008E2FFC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA55772B0A7929705065317C /* Pods-touch-face-realm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BLD9C8T4L3;
-				INFOPLIST_FILE = "touch-face/Info.plist";
+				INFOPLIST_FILE = "touch-face-realm/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hotgs.touch-face";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hotgs.touch-face-realm";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -366,16 +438,17 @@
 		};
 		270B7E50215C2119008E2FFC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1B701893F5DD64A459A328A /* Pods-touch-face-realm.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BLD9C8T4L3;
-				INFOPLIST_FILE = "touch-face/Info.plist";
+				INFOPLIST_FILE = "touch-face-realm/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hotgs.touch-face";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hotgs.touch-face-realm";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -404,19 +477,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		27C358B8215D41B4003BD1CC /* touch-face.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				27C358B9215D41B4003BD1CC /* securenote_app.xcdatamodel */,
-			);
-			currentVersion = 27C358B9215D41B4003BD1CC /* securenote_app.xcdatamodel */;
-			path = "touch-face.xcdatamodeld";
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 270B7E34215C2119008E2FFC /* Project object */;
 }

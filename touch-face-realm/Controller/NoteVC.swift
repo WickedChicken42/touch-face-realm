@@ -8,14 +8,16 @@
 
 import UIKit
 import LocalAuthentication
+import RealmSwift
 
 class NoteVC: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var addNote: UIBarButtonItem!
     
-    var myNotes: [Note] = []
-    
+    //var myNotes: [Note] = []
+    var myNotes: Results<Note>?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -28,7 +30,9 @@ class NoteVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchCoreDataObjects()
+        if myNotes == nil {
+            fetchCoreDataObjects()
+        }
         
         tableView.reloadData()
     }
@@ -79,8 +83,8 @@ class NoteVC: UIViewController {
     @IBAction func addNotePressed(_ sender: Any) {
         
         let newNote = Note()
-        myNotes.append(newNote)
-        pushNoteFor(indexPath: IndexPath(row: myNotes.count - 1, section: 0))
+//        myNotes.append(newNote)
+        pushNoteFor(note: newNote)
 
     }
     
@@ -121,14 +125,18 @@ extension NoteVC: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myNotes.count
+        if myNotes == nil {
+            return 0
+        } else {
+            return myNotes!.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath) as? NoteCell else { return UITableViewCell() }
         
-        let note = myNotes[indexPath.row]
+        let note = myNotes![indexPath.row]
         cell.configureCell(note: note)
         
         return cell
@@ -136,28 +144,41 @@ extension NoteVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // pass note and present VC
-        if myNotes[indexPath.row].lockStatus == .locked {
+        if myNotes![indexPath.row].lockStatus == .locked {
             // perform the biometrics check
+            debugPrint("1:ThreadL \(Thread.current.description)")
             authenticateBiometrics(completion: { (authenticated) in
                 if authenticated {
-                    self.myNotes[indexPath.row].flipLockStatus()
-                    // Needed to call this Dispatch because the auth work happenes on a background thread but we need to push our VC on the main thread
-                    DispatchQueue.main.async {
-                        self.pushNoteFor(indexPath: indexPath)
-                    }
+                    debugPrint("2:ThreadL \(Thread.current.description)")
                     
+                    // Caling Dispatchqueue to realign us with the main thread after the Biometrics
+                    DispatchQueue.main.async { [unowned self] in
+                        debugPrint("3:ThreadL \(Thread.current.description)")
+                        self.myNotes![indexPath.row].flipLockStatus()
+                        
+                        // Needed to call this Dispatch because the auth work happenes on a background thread
+                        // but we need to push our VC on the main thread
+                        debugPrint("4:ThreadL \(Thread.current.description)")
+                        
+                        self.pushNoteFor(note: self.myNotes![indexPath.row])
+                        
+                        debugPrint("5:ThreadL \(Thread.current.description)")
+                    }
+
                 }
             })
+
         } else {
-            pushNoteFor(indexPath: indexPath)
+            pushNoteFor(note: myNotes![indexPath.row])
         }
     }
     
-    func pushNoteFor(indexPath: IndexPath) {
+    func pushNoteFor(note: Note) {
         
         guard let noteDetailVC = storyboard?.instantiateViewController(withIdentifier: "NoteDetailVC") as? NoteDetailVC else { return }
         
-        noteDetailVC.currentNote = myNotes[indexPath.row]
+//        noteDetailVC.currentNote = myNotes[indexPath.row]
+        noteDetailVC.currentNote = note
         //noteDetailVC.index = indexPath.row
         navigationController?.pushViewController(noteDetailVC, animated: true)
         
@@ -179,13 +200,13 @@ extension NoteVC: UITableViewDelegate, UITableViewDataSource {
         // Define the Delete action shown when swiping on a row item
         let deleteAction = UITableViewRowAction(style: .destructive, title: "DELETE") { (rowAction, indexPath) in
             // What we will do when the Delete action is pressed (or full swiped)
-            if self.myNotes[indexPath.row].lockStatus == .locked {
+            if self.myNotes![indexPath.row].lockStatus == .locked {
                 // Show the alert that lets the user know they can not delete the locked note
                 // perform the biometrics check
                 self.authenticateBiometrics(completion: { (authenticated) in
                     if authenticated {
                         // Removes the goal from persistent storage
-                        self.myNotes[indexPath.row].deleteFromData(completion: { (success) in
+                        self.myNotes![indexPath.row].deleteFromData(completion: { (success) in
                             if success {
                                 print("We deleted the data - YEA!!!!)")
                             } else {
@@ -195,7 +216,7 @@ extension NoteVC: UITableViewDelegate, UITableViewDataSource {
                         
                         DispatchQueue.main.async {
                             // Reload the local goals array from persisten storage
-                            self.fetchCoreDataObjects()
+                            //self.fetchCoreDataObjects()
                             
                             // Remove the deleted goal from the table view
                             self.tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -205,7 +226,7 @@ extension NoteVC: UITableViewDelegate, UITableViewDataSource {
                 })
             } else {
                 // Removes the goal from persistent storage
-                self.myNotes[indexPath.row].deleteFromData(completion: { (success) in
+                self.myNotes![indexPath.row].deleteFromData(completion: { (success) in
                     if success {
                         print("We deleted the data - YEA!!!!)")
                     } else {
@@ -214,7 +235,7 @@ extension NoteVC: UITableViewDelegate, UITableViewDataSource {
                 })
                 
                 // Reload the local goals array from persisten storage
-                self.fetchCoreDataObjects()
+                //self.fetchCoreDataObjects()
                 
                 // Remove the deleted goal from the table view
                 tableView.deleteRows(at: [indexPath], with: .automatic)
