@@ -12,6 +12,7 @@ class NoteCell: UITableViewCell {
 
     @IBOutlet var messageLbl: UILabel!
     @IBOutlet var lockImageView: UIImageView!
+    @IBOutlet var timestampLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +29,12 @@ class NoteCell: UITableViewCell {
             messageLbl.text = note.message
             lockImageView.isHidden = true
         }
+        
+        // Used to help us format the string of the number we want to display
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .medium
+        timestampLbl.text = formatter.string(for: note.noteTimestamp)!
     }
 
 }
